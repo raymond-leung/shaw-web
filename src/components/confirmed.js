@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     banner: {
-        width: '1420px',
+        width: '100%',
         margin: '0 auto',
     },
     response: {

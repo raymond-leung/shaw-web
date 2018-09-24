@@ -12,7 +12,7 @@ const styles = theme => ({
         marginBottom: '100px'
     },
     banner: {
-        width: '1420px',
+        width: '100%',
         margin: '0 auto',
     }
 });

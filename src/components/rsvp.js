@@ -19,7 +19,7 @@ import { logout } from './../actions/authActions';
 
 const styles = theme => ({
     banner: {
-        width: '1420px'
+        width: '100%'
     },
     button: {
         margin: theme.spacing.unit,

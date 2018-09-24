@@ -45,6 +45,7 @@ const styles = theme => ({
     },
     submitButton: {
         paddingTop: '30px',
+        paddingBottom: '50px',
         margin: '0 auto'
     }
 });
@@ -94,7 +95,6 @@ export class Login extends React.Component {
 
         return (
             <div id='login'>
-                <img className={classes.banner} src='./img/1920x300.jpg' />
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'top',
@@ -129,6 +129,9 @@ export class Login extends React.Component {
                     model="forms.auth"
                 >
                     <Grid container spacing={24}>
+                        <Grid item lg={12} md={12} sm={12} xs={12}>
+                            <img className={classes.banner} src='./img/1920x300.jpg' />
+                        </Grid>
                         <Grid item lg={12} md={12} sm={12} xs={12} className={classes.inputLabel}>
                             <InputLabel htmlFor="employee-last-name">Employee Last Name</InputLabel>
                         </Grid>
@@ -150,7 +153,7 @@ export class Login extends React.Component {
                                 component={TextField}
                             />
                         </Grid>
-                        <Grid item className={classes.submitButton} style={{ 'paddingTop': '30px' }}>
+                        <Grid item className={classes.submitButton} style={{ 'paddingTop': '30px', 'paddingBottom': '50px' }}>
                             <Button 
                                 variant="contained" 
                                 color="primary" 

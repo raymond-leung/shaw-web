@@ -18,7 +18,7 @@ const styles = theme => ({
     root: {
         margin: '0 auto',
         padding: 0,
-        width: '1420px',
+        width: '100%',
     },
     content: {
         flexGrow: 1,
