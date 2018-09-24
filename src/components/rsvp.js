@@ -47,6 +47,10 @@ const styles = theme => ({
     },
     rsvpForm: {
         textAlign: 'center',
+    },
+    details: {
+        textAlign: 'center',
+        marginTop: '35px',
     }
 });
 
@@ -174,6 +178,15 @@ export class Rsvp extends React.Component {
                                     ]}
                                 />
                             </Snackbar>
+
+                            <div className={classes.details}>
+                                <Typography variant="headline" style={{ fontWeight: '700' }}>2018 End of Year Celebration</Typography>
+                                <br />
+                                <Typography variant="title">Vancouver Convention Center</Typography>
+                                <Typography variant="title">Saturday December 8th, 2018</Typography>
+                                <Typography variant="title">7:45PM - 1:00AM</Typography>
+                                <Typography variant="title"><a href="./img/faq.pdf" target="_blank">FAQ</a></Typography>
+                            </div>
 
                             <RsvpForm 
                                 model="forms.rsvp"

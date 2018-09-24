@@ -109,7 +109,7 @@ export class Login extends React.Component {
                             <div className={classes.errorMessage}>
                                 <p>There was an error with your login.</p>
                                 <p>Please double check your credentials and try again.</p>
-                                <p>If the problem persits, please contact Jenny Wong for assistance.</p>
+                                <p>If the problem persists, please contact <a href="mailto:YearEndCelebration-Vancovuer@sjrb.ca">Year End Celebration - Vancouver</a> for assistance.</p>
                             </div>
                         }
                         action={[
