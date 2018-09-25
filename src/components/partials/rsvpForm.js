@@ -95,7 +95,7 @@ export class RsvpForm extends React.Component {
                         />
                     </Grid>
                     <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
-                        <InputLabel htmlFor="guest-employee-id">Guest Employee Id</InputLabel>
+                        <InputLabel htmlFor="guest-employee-id">Guest Employee ID</InputLabel>
                     </Grid>
                     <Grid item lg={6} md={6} sm={12} xs={12}>
                         <Control.text
