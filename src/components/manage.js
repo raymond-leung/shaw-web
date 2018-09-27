@@ -263,7 +263,7 @@ export class Manage extends React.Component {
                 </div>
                 <TablePagination
                     component="div"
-                    count={this.props.manage.list.length}
+                    count={displayContent.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={this.handleChangePage}
