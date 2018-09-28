@@ -9,6 +9,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
+import { cancelRsvp } from './../../actions/manageActions';
+
 import RsvpForm from './rsvpForm';
 
 const styles = theme => ({
@@ -21,6 +23,22 @@ const styles = theme => ({
 });
 
 export class EditEmployeeDialog extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.cancelRsvp = this.cancelRsvp.bind(this);
+    };
+
+    cancelRsvp() {
+        this.props.cancelRsvp()
+            .then(() => {
+                this.props.onSubmit();
+            })
+            .catch((err) => {
+                console.log('Cancel error: ', err);
+            })
+    };
+
     render() {
         const { classes } = this.props;
         
@@ -37,6 +55,7 @@ export class EditEmployeeDialog extends React.Component {
                     />
                     <div style={{ textAlign: 'center' }}>
                         <Button variant="contained" color="primary" className={classes.button} onClick={this.props.onSubmit}>Save</Button>
+                        <Button variant="outlined" color="primary" className={classes.button} onClick={this.cancelRsvp}>Cancel RSVP</Button>
                         <Button variant="outlined" color="default" onClick={this.props.onClose} className={classes.button}>Close</Button>
                     </div>
                 </DialogContent>
@@ -53,6 +72,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        cancelRsvp: () => {
+            return dispatch(cancelRsvp());
+        }
     };
 };
 

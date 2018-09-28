@@ -85,6 +85,11 @@ const rsvpFormReducer = (state=defaultState, action) => {
                 hasError: false,
                 error: {}
             }
+        case 'SET_CANCEL_RSVP':
+            return { 
+                ...state, 
+                status: 0 
+            };
         default:
             return { ...state };
     }

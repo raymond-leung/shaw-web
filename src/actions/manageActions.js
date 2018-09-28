@@ -97,3 +97,11 @@ export function updateEmployee(rsvpObj) {
         })
     }
 }
+
+export function cancelRsvp() {
+    return (dispatch) => {
+        dispatch({ type: 'SET_CANCEL_RSVP', payload: {} });
+
+        return Promise.resolve();
+    }
+};
