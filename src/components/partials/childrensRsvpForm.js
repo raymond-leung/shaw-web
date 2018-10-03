@@ -43,6 +43,13 @@ export class ChildrensRsvpForm extends React.Component {
 
         if(!rsvp.employeeId) { return null }
 
+        let currentStatus = "Not Responded";
+        if(this.props.rsvp.status === 1) {
+            currentStatus = "Attending";
+        } else if(this.props.rsvp.status === 0) {
+            currentStatus = "Cancelled";
+        }
+        
         return (
             <Form
                 id="childrens-rsvp-form"
@@ -50,6 +57,12 @@ export class ChildrensRsvpForm extends React.Component {
                 className={classes.rsvpForm}
             >
                 <Grid container spacing={24} style={{ justifyContent: 'center' }}>
+                    <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
+                        <InputLabel>Current status</InputLabel>
+                    </Grid>
+                    <Grid item lg={6} md={6} sm={12} xs={12}>
+                        <Typography>{currentStatus}</Typography>
+                    </Grid>
                     <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
                         <InputLabel>Employee ID</InputLabel>
                     </Grid>
