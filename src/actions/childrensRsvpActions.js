@@ -39,7 +39,7 @@ export function rsvp(rsvpObj) {
 export function cancelRsvp() {
     return (dispatch) => {
         dispatch({ type: 'CANCEL_CHILDRENS_RSVP_START', payload: {} });
-        return axiosWrapper.remove()
+        return axiosWrapper.remove(`${process.env.CHILDRENS_API_URL}/api/v1/childrens/rsvp`)
             .then((response) => {
                 dispatch({ type: 'CANCEL_CHILDRENS_RSVP_COMPLETE', payload: response.data });
             })

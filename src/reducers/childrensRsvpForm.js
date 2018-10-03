@@ -75,6 +75,7 @@ const childrensRsvpFormReducer = (state=defaultState, action) => {
                 ...state,
                 isLoading: false,
                 error: {},
+                status: 1,
                 children: childrenCopy
             }
         case 'CANCEL_CHILDRENS_RSVP_COMPLETE':
