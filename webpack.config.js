@@ -53,8 +53,12 @@ module.exports = {
         new webpack.DefinePlugin({
             "process.env": {
                 API_URL: JSON.stringify(process.env.API_URL),
+                CHILDRENS_API_URL: JSON.stringify(process.env.CHILDRENS_API_URL),
                 START_DATE: JSON.stringify(process.env.START_DATE),
-                END_DATE: JSON.stringify(process.env.END_DATE)
+                END_DATE: JSON.stringify(process.env.END_DATE),
+                CHILDRENS_START_DATE: JSON.stringify(process.env.CHILDRENS_START_DATE),
+                CHILDRENS_END_DATE: JSON.stringify(process.env.CHILDRENS_END_DATE),
+                CHILDRENS_CAPACITY: JSON.stringify(process.env.CHILDRENS_CAPACITY)
             }
         }),
         new HtmlWebpackPlugin({

@@ -12,12 +12,13 @@ const styles = theme => ({
         marginBottom: '100px'
     },
     banner: {
-        width: '100%',
         margin: '0 auto',
+        width: '512px',
+        height: '512px'
     }
 });
 
-export class Closed extends React.Component {
+export class ChildrensClosed extends React.Component {
     render() {
         const { classes } = this.props;
 
@@ -36,15 +37,15 @@ export class Closed extends React.Component {
             'December'
         ];
 
-        const startDate = new Date(process.env.START_DATE);
-        const endDate = new Date(process.env.END_DATE);
+        const startDate = new Date(process.env.CHILDRENS_START_DATE);
+        const endDate = new Date(process.env.CHILDRENS_END_DATE);
 
         return (
-            <div id='closed'>
-                <img src='./img/1920x800.jpg' className={classes.banner} />
+            <div id='closed' style={{textAlign: 'center'}}>
+                <img src='./../img/ChildrensBanner2018.png' className={classes.banner} />
                 <div className={classes.content}>
                     <Typography variant="title">
-                        The 2018 End of Year Celebration RSVP is available between <br /><br />
+                        The 2018 Shaw Childrens Christmas RSVP is available between <br /><br />
                         {months[startDate.getMonth()]} {startDate.getDate()}, {startDate.getFullYear()} <br /><br />till<br /><br />
                         {months[endDate.getMonth()]} {endDate.getDate()}, {endDate.getFullYear()}.
                     </Typography>
@@ -59,4 +60,4 @@ export class Closed extends React.Component {
     }
 };
 
-export default withStyles(styles)(Closed);
+export default withStyles(styles)(ChildrensClosed);

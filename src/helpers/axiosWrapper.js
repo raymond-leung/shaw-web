@@ -7,6 +7,7 @@ axios.interceptors.response.use((response) => {
 }, (error) => {
     if(error.response.status === 401) {
         localStorage.removeItem('auth-token');
+        localStorage.removeItem('childrens-auth-token');
     }
 
     return Promise.reject(error);
@@ -15,7 +16,7 @@ axios.interceptors.response.use((response) => {
 export default {
     get(url, config = {}) {
         let headers = config.headers || {};
-        let authKey = localStorage.getItem('auth-token');
+        let authKey = localStorage.getItem('auth-token') || localStorage.getItem('childrens-auth-token');
         if(authKey) {
             headers = { ...headers, authorization: "bearer " + authKey };
         }
@@ -28,7 +29,7 @@ export default {
     },
     post(url, config = {}) {
         let headers = config.headers || {};
-        let authKey = localStorage.getItem('auth-token');
+        let authKey = localStorage.getItem('auth-token') || localStorage.getItem('childrens-auth-token');
         if(authKey) {
             headers = { ...headers, authorization: "bearer " + authKey };
         }
@@ -42,7 +43,7 @@ export default {
     },
     put(url, config = {}) {
         let headers = config.headers || {};
-        let authKey = localStorage.getItem('auth-token');
+        let authKey = localStorage.getItem('auth-token') || localStorage.getItem('childrens-auth-token');
         if(authKey) {
             headers = { ...headers, authorization: "bearer " + authKey };
         }
@@ -56,7 +57,7 @@ export default {
     },
     remove(url, config = {}) {
         let headers = config.headers || {};
-        let authKey = localStorage.getItem('auth-token');
+        let authKey = localStorage.getItem('auth-token') || localStorage.getItem('childrens-auth-token');
         if(authKey) {
             headers = { ...headers, authorization: "bearer " + authKey };
         }
