@@ -106,7 +106,7 @@ export class ChildrensRsvpForm extends React.Component {
                         <InputLabel>Children</InputLabel>
                     </Grid>
                     <Grid item lg={6} md={6} sm={12} xs={12}>
-                        <ExpansionPanel expanded={!!(rsvp.children[0] && rsvp.children[0].name)}>
+                        <ExpansionPanel defaultExpanded={rsvp.children[0] && rsvp.children[0].name ? true : false}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                                 <Typography className={classes.heading}>First Child</Typography>
                             </ExpansionPanelSummary>
