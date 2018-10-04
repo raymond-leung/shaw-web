@@ -7,14 +7,9 @@ const defaultState = {
     spouse: "",
     photoWithSanta: false,
     children: [],
+    dietary: "",
     isLoading: false,
     error: {}
-};
-
-const childDefaultState = {
-    name: "",
-    age: "",
-    gender: "",
 };
 
 const childrensRsvpFormReducer = (state=defaultState, action) => {
@@ -32,19 +27,21 @@ const childrensRsvpFormReducer = (state=defaultState, action) => {
                 spouse: "",
                 photoWithSanta: false,
                 children: [],
+                dietary: "",
                 isLoading: true,
                 error: {}
             }
         case 'GET_CHILDRENS_RSVP_COMPLETE':
             return { 
                 ...state,
-                employeeId: action.payload.employee[0].employeeId,
-                firstName: action.payload.employee[0].firstName,
-                lastName: action.payload.employee[0].lastName,
-                email: action.payload.employee[0].email,
+                employeeId: action.payload.employee[0].employeeId || "",
+                firstName: action.payload.employee[0].firstName || "",
+                lastName: action.payload.employee[0].lastName || "",
+                email: action.payload.employee[0].email || "",
                 status: action.payload.employee[0].status,
-                spouse: action.payload.employee[0].spouseName,
+                spouse: action.payload.employee[0].spouseName || "",
                 photoWithSanta: action.payload.employee[0].photoWithSanta,
+                dietary: action.payload.employee[0].dietary || "",
                 children: action.payload.children,
                 isLoading: false,
                 error: {}
@@ -60,6 +57,7 @@ const childrensRsvpFormReducer = (state=defaultState, action) => {
                 spouse: "",
                 photoWithSanta: false,
                 children: [],
+                dietary: "",
                 isLoading: false,
                 error: action.payload.err
             }

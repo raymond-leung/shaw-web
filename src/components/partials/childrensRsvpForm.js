@@ -116,6 +116,18 @@ export class ChildrensRsvpForm extends React.Component {
                         />
                     </Grid>
                     <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
+                        <InputLabel>Dietary Restrictions</InputLabel>
+                    </Grid>
+                    <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
+                        <Control.text
+                            model=".dietary"
+                            multiline={true}
+                            rows={1}
+                            rowsMax={5}
+                            component={TextField}
+                        />
+                    </Grid>
+                    <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
                         <InputLabel>Children</InputLabel>
                     </Grid>
                     <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -140,6 +152,15 @@ export class ChildrensRsvpForm extends React.Component {
                                     <Grid item lg={6} md={6} sm={12} xs={12}>
                                         <Control.text
                                             model=".children[0].age"
+                                            component={TextField}
+                                        />
+                                    </Grid>
+                                    <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
+                                        <InputLabel>Relationship</InputLabel>
+                                    </Grid>
+                                    <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
+                                        <Control.text
+                                            model=".children[0].relationship"
                                             component={TextField}
                                         />
                                     </Grid>
@@ -191,6 +212,15 @@ export class ChildrensRsvpForm extends React.Component {
                                             component={TextField}
                                         />
                                     </Grid>
+                                    <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
+                                        <InputLabel>Relationship</InputLabel>
+                                    </Grid>
+                                    <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
+                                        <Control.text
+                                            model=".children[1].relationship"
+                                            component={TextField}
+                                        />
+                                    </Grid>
                                     <Grid item lg={6} md={6} sm={12} xs={12}>
                                         <InputLabel>Gender</InputLabel>
                                     </Grid>
@@ -239,6 +269,15 @@ export class ChildrensRsvpForm extends React.Component {
                                             component={TextField}
                                         />
                                     </Grid>
+                                    <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
+                                        <InputLabel>Relationship</InputLabel>
+                                    </Grid>
+                                    <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
+                                        <Control.text
+                                            model=".children[2].relationship"
+                                            component={TextField}
+                                        />
+                                    </Grid>
                                     <Grid item lg={6} md={6} sm={12} xs={12}>
                                         <InputLabel>Gender</InputLabel>
                                     </Grid>
@@ -284,6 +323,15 @@ export class ChildrensRsvpForm extends React.Component {
                                     <Grid item lg={6} md={6} sm={12} xs={12}>
                                         <Control.text
                                             model=".children[3].age"
+                                            component={TextField}
+                                        />
+                                    </Grid>
+                                    <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
+                                        <InputLabel>Relationship</InputLabel>
+                                    </Grid>
+                                    <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
+                                        <Control.text
+                                            model=".children[3].relationship"
                                             component={TextField}
                                         />
                                     </Grid>

@@ -26,6 +26,7 @@ export function rsvp(rsvpObj) {
                 spouseName: rsvpObj.spouse,
                 email: rsvpObj.email,
                 photoWithSanta: rsvpObj.photoWithSanta,
+                dietary: rsvpObj.dietary,
                 children: rsvpObj.children
             }
         }).then((response) => {
