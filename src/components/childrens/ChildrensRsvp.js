@@ -105,7 +105,8 @@ export class ChildrensRsvp extends React.Component {
 
         this.props.getAttendingCount()
             .then((count) => {
-                if(count > process.env.CHILDRENS_CAPACITY) {
+                count = !count ? 0 : count;
+                if(parseInt(count) > parseInt(process.env.CHILDRENS_CAPACITY)) {
                     this.props.history.push('/childrens/full');
                     return;
                 }
