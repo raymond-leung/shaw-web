@@ -115,7 +115,6 @@ export class ChildrensManage extends React.Component {
         this.props.getList(1)
             .catch((err) => {
                 if(err.response.status === 403) {
-                    console.log('forwarding');
                     this.props.history.push('/');
                 }
             });
@@ -136,7 +135,6 @@ export class ChildrensManage extends React.Component {
             displayContent = this.props.manage.list;
         }
 
-        console.log('displayContent: ', displayContent);
         return (
             <React.Fragment>
             <AppBar position="static">
@@ -202,7 +200,6 @@ export class ChildrensManage extends React.Component {
                                     (
                                         displayContent
                                             .map((attending) => {
-                                                console.log("attending: ", attending);
                                                 let status = 'No Response';
                                                 if(attending.status === 0) {
                                                     status = 'Cancelled';
@@ -221,7 +218,7 @@ export class ChildrensManage extends React.Component {
                                                         {
                                                             attending.children && attending.children.map((child) => {
                                                                 return (
-                                                                    <div>{child.name} {child.age} {child.gender} { child.relationship}</div>
+                                                                    <div key={`${attending.employeeId}-${child.name}`}>{child.name} {child.age} {child.gender} { child.relationship}</div>
                                                                 )
                                                             })
                                                         }
@@ -268,7 +265,7 @@ const mapDispatchToProps = (dispatch) => {
         lookupEmployee: (employeeId) => { return dispatch(getEmployee(employeeId)) },
         updateEmployee: (rsvpObj) => { return dispatch(updateEmployee(rsvpObj)) },
         doSearch: (searchTerm) => { dispatch(searchEmployee(searchTerm)) },
-        searchTermChange: (newSearchTerm) => { dispatch({ type: 'SEARCH_TERM', payload: { searchTerm: newSearchTerm } }) },
+        searchTermChange: (newSearchTerm) => { dispatch({ type: 'CHILDRENS_SEARCH_TERM', payload: { searchTerm: newSearchTerm } }) },
     }
 };
 

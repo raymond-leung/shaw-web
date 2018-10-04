@@ -67,6 +67,11 @@ const childrensManageReducer = (state=defaultState, action) => {
                 ...state,
                 rsvpCounts: {}
             };
+        case 'CHILDRENS_SEARCH_TERM':
+            return {
+                ...state,
+                searchTerm: action.payload.searchTerm
+            }
         default: 
             return { ...state };
     };

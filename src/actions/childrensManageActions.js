@@ -19,13 +19,13 @@ export function getList(status) {
 
 export function searchEmployee(searchTerm) {
     return (dispatch) => {
-        dispatch({ type: 'SEARCH_START', payload: {} });
+        dispatch({ type: 'CHILDRENS_SEARCH_START', payload: {} });
         return axiosWrapper.get(`${process.env.CHILDRENS_API_URL}/api/v1/childrens/manage/employee/${searchTerm}`)
             .then((response) => {
-                dispatch({ type: 'SEARCH_COMPLETE', payload: { searchResults: response.data } });
+                dispatch({ type: 'CHILDRENS_SEARCH_COMPLETE', payload: { searchResults: response.data } });
             })
             .catch((err) => {
-                dispatch({ type: 'SEARCH_ERROR', payload: { err } });
+                dispatch({ type: 'CHILDRENS_SEARCH_ERROR', payload: { err } });
             })
     }
 }
@@ -63,20 +63,20 @@ export function getCounts() {
 
 export function getEmployee(employeeId) {
     return (dispatch) => {
-        dispatch({ type: 'GET_RSVP_START', payload: {} });
+        dispatch({ type: 'GET_CHILDRENS_RSVP_START', payload: {} });
         return axiosWrapper.get(`${process.env.CHILDRENS_API_URL}/api/v1/childrens/manage/employee/${employeeId}`)
             .then((response) => {
-                return dispatch({ type: 'GET_RSVP_COMPLETE', payload: response.data[0] });
+                return dispatch({ type: 'GET_CHILDRENS_RSVP_COMPLETE', payload: response.data[0] });
             })
             .catch((err) => {
-                dispatch({ type: 'GET_RSVP_ERROR', payload: {} });
+                dispatch({ type: 'GET_CHILDRENS_RSVP_ERROR', payload: {} });
             })
     }
 }
 
 export function updateEmployee(rsvpObj) {
     return (dispatch) => {
-        dispatch({ type: 'SUBMIT_RSVP_START', payload: {} });
+        dispatch({ type: 'SUBMIT_CHILDRENS_RSVP_START', payload: {} });
         return axiosWrapper.put(`${process.env.CHILDRENS_API_URL}/api/v1/childrens/manage/employee/${rsvpObj.employeeId}`, {
             data: {
                 employeeId: rsvpObj.employeeId,
@@ -90,9 +90,9 @@ export function updateEmployee(rsvpObj) {
                 email: rsvpObj.email
             }
         }).then((response) => {
-            dispatch({ type: 'SUBMIT_RSVP_COMPLETE', payload: {} })
+            dispatch({ type: 'SUBMIT_CHILDRENS_RSVP_COMPLETE', payload: {} })
         }).catch((err) => {
-            dispatch({ type: 'SUBMIT_RSVP_ERROR', payload: { err} });
+            dispatch({ type: 'SUBMIT_CHILDRENS_RSVP_ERROR', payload: { err} });
             return Promise.reject(err);
         })
     }
