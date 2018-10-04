@@ -18,7 +18,7 @@ import ChildrensConfirmed from './childrens/ChildrensConfirmed';
 import ChildrensClosed from './childrens/ChildrensClosed';
 import ChildrensFull from './childrens/ChildrensFull';
 import ChildrensRsvp from './childrens/ChildrensRsvp';
-//import ChildrensManage from './childrens/ChildrensManage';
+import ChildrensManage from './childrens/ChildrensManage';
 
 import localStorage from './../helpers/cache';
 
@@ -69,7 +69,7 @@ export class App extends React.Component {
                         <ChildrensLoginRoute exact={true} path='/childrens/confirmed' component={ChildrensConfirmed} />
                         <ChildrensLoginRoute exact={true} path='/childrens/closed' component={ChildrensClosed} />
                         <ChildrensLoginRoute exact={true} path='/childrens/full' component={ChildrensFull} />
-                        
+                        <ChildrensLoginRoute exact={true} path='/childrens/manage' component={ChildrensManage} />                        
                     </Switch>
                 </main>
             </div>

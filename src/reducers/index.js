@@ -3,6 +3,7 @@ import { combineForms, createForms } from 'react-redux-form';
 
 import authReducer from './auth';
 import manageReducer from './manage';
+import childrensManageReducer from './childrensManage'; 
 
 import authFormReducer from './authForm';
 import rsvpFormReducer from './rsvpForm';
@@ -14,6 +15,7 @@ import childrensRsvpFormReducer from './childrensRsvpForm';
 export default combineReducers({
     auth: authReducer, 
     manage: manageReducer,
+    childrensManage: childrensManageReducer,
 
     forms: combineForms({
         rsvp: rsvpFormReducer,
