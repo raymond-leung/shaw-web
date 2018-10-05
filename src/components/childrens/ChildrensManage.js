@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 
 import AddChildrensEmployeeDialog from './../partials/addChildrensEmployeeDialog';
 
-import { getList, getEmployee, searchEmployee, updateEmployee } from './../../actions/childrensManageActions';
+import { getList, getCounts, getEmployee, searchEmployee, updateEmployee } from './../../actions/childrensManageActions';
 
 const styles = theme => ({
     grow: { 
@@ -70,7 +70,7 @@ export class ChildrensManage extends React.Component {
     }
 
     addComplete() {
-        //this.props.getCounts();
+        this.props.getCounts();
     }
 
     handleOpenEditDialog() {
@@ -103,7 +103,7 @@ export class ChildrensManage extends React.Component {
         this.props.updateEmployee(this.props.rsvpForm)
             .then(() => {
                 this.props.getList(this.state.targetStatus);
-                //this.props.getCounts();
+                this.props.getCounts();
                 this.setState({ openEditDialog: false });
             })
             .catch((err) => {
@@ -120,7 +120,7 @@ export class ChildrensManage extends React.Component {
             });
 
         this.setState({ targetStatus: 1 });
-        //this.props.getCounts();
+        this.props.getCounts();
     }
 
     render() {
@@ -261,7 +261,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getList: (status) => { return dispatch(getList(status)) },
-        //getCounts: () => { dispatch(getCounts()) },
+        getCounts: () => { dispatch(getCounts()) },
         lookupEmployee: (employeeId) => { return dispatch(getEmployee(employeeId)) },
         updateEmployee: (rsvpObj) => { return dispatch(updateEmployee(rsvpObj)) },
         doSearch: (searchTerm) => { dispatch(searchEmployee(searchTerm)) },

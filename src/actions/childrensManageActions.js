@@ -50,13 +50,13 @@ export function addEmployee(employeeObj) {
 
 export function getCounts() {
     return (dispatch) => {
-        dispatch({ type: 'GET_RSVP_COUNTS_START', payload: {} });
+        dispatch({ type: 'GET_CHILDRENS_RSVP_COUNTS_START', payload: {} });
         return axiosWrapper.get(`${process.env.CHILDRENS_API_URL}/api/v1/childrens/manage/counts`)
             .then((response) => {
-                dispatch({ type: 'GET_RSVP_COUNTS_COMPLETE', payload: response.data });
+                dispatch({ type: 'GET_CHILDRENS_RSVP_COUNTS_COMPLETE', payload: response.data });
             })
             .catch((err) => {
-                dispatch({ type: 'GET_RSVP_COUNTS_ERROR', payload: { err } });
+                dispatch({ type: 'GET_CHILDRENS_RSVP_COUNTS_ERROR', payload: { err } });
             })
     }
 }
