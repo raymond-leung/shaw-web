@@ -5,7 +5,8 @@ export function getRsvp() {
         dispatch({ type: 'GET_CHILDRENS_RSVP_START', payload: {} });
         return axiosWrapper.get(`${process.env.CHILDRENS_API_URL}/api/v1/childrens/rsvp`)
             .then((response) => {
-                dispatch({ type: 'GET_CHILDRENS_RSVP_COMPLETE', payload: response.data });
+                const payload = { ...response.data.employee, children: response.data.children };
+                dispatch({ type: 'GET_CHILDRENS_RSVP_COMPLETE', payload });
                 return response.data;
             })
             .catch((err) => {

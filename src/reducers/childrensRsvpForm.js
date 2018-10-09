@@ -34,14 +34,14 @@ const childrensRsvpFormReducer = (state=defaultState, action) => {
         case 'GET_CHILDRENS_RSVP_COMPLETE':
             return { 
                 ...state,
-                employeeId: action.payload.employee[0].employeeId || "",
-                firstName: action.payload.employee[0].firstName || "",
-                lastName: action.payload.employee[0].lastName || "",
-                email: action.payload.employee[0].email || "",
-                status: action.payload.employee[0].status,
-                spouse: action.payload.employee[0].spouseName || "",
-                photoWithSanta: action.payload.employee[0].photoWithSanta,
-                dietary: action.payload.employee[0].dietary || "",
+                employeeId: action.payload.employeeId || "",
+                firstName: action.payload.firstName || "",
+                lastName: action.payload.lastName || "",
+                email: action.payload.email || "",
+                status: action.payload.status,
+                spouse: action.payload.spouseName || "",
+                photoWithSanta: action.payload.photoWithSanta,
+                dietary: action.payload.dietary || "",
                 children: action.payload.children,
                 isLoading: false,
                 error: {}
@@ -89,6 +89,16 @@ const childrensRsvpFormReducer = (state=defaultState, action) => {
                 ...state, 
                 isLoading: false,
                 error: action.payload.err
+            }
+        case 'SET_CHILDRENS_CANCEL_RSVP':
+            return {
+                ...state,
+                status: 0
+            }
+        case 'SET_CHILDRENS_ATTENDING_RSVP':
+            return {
+                ...state,
+                status: 1
             }
         default:
             return { ...state };

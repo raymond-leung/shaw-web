@@ -63,7 +63,7 @@ export class ChildrensRsvp extends React.Component {
     }
 
     rsvpClickHandler() {
-        if(this.props.rsvp.firstName.length && this.props.rsvp.lastName.length && this.props.rsvp.email.length) {
+        if(this.props.rsvp.firstName.length && this.props.rsvp.lastName.length && this.props.rsvp.email.length && this.props.rsvp.children.length) {
             this.props.submit(this.props.rsvp)
                 .then((response) => {
                     this.setState({ showError: false });

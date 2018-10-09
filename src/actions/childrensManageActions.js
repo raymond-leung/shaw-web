@@ -81,13 +81,13 @@ export function updateEmployee(rsvpObj) {
             data: {
                 employeeId: rsvpObj.employeeId,
                 status: rsvpObj.status,
-                guestName: rsvpObj.guestName,
-                guestEmployeeId: rsvpObj.guestEmployeeId,
-                firstName: rsvpObj.firstName,
-                lastName: rsvpObj.lastName,
-                dietary: rsvpObj.dietary,
-                assistance: rsvpObj.assistance,
-                email: rsvpObj.email
+                spouseName: rsvpObj.spouse || "",
+                firstName: rsvpObj.firstName || "",
+                lastName: rsvpObj.lastName || "",
+                dietary: rsvpObj.dietary || "",
+                email: rsvpObj.email || "",
+                photoWithSanta: rsvpObj.photoWithSanta || false,
+                children: rsvpObj.children
             }
         }).then((response) => {
             dispatch({ type: 'SUBMIT_CHILDRENS_RSVP_COMPLETE', payload: {} })
@@ -100,8 +100,16 @@ export function updateEmployee(rsvpObj) {
 
 export function cancelRsvp() {
     return (dispatch) => {
-        dispatch({ type: 'SET_CANCEL_RSVP', payload: {} });
+        dispatch({ type: 'SET_CHILDRENS_CANCEL_RSVP', payload: {} });
 
         return Promise.resolve();
     }
 };
+
+export function attendingRsvp() {
+    return (dispatch) => {
+        dispatch({ type: 'SET_CHILDRENS_ATTENDING_RSVP', payload: {} });
+
+        return Promise.resolve();
+    }
+}

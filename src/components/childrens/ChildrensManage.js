@@ -16,6 +16,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 
 import AddChildrensEmployeeDialog from './../partials/addChildrensEmployeeDialog';
+import EditChildrensEmployeeDialog from './../partials/editChildrensEmployeeDialog.js';
 
 import { getList, getCounts, getEmployee, searchEmployee, updateEmployee } from './../../actions/childrensManageActions';
 
@@ -91,7 +92,7 @@ export class ChildrensManage extends React.Component {
 
     editEmployee(evt) {
         this.props.lookupEmployee(evt.target.innerHTML)
-            .then(() => {
+            .then((response) => {
                 this.handleOpenEditDialog();
             })
             .catch((err) => {
@@ -114,8 +115,8 @@ export class ChildrensManage extends React.Component {
     componentDidMount() {
         this.props.getList(1)
             .catch((err) => {
-                if(err.response.status === 403) {
-                    this.props.history.push('/');
+                if(err.response.status === 403 || err.response.status === 401) {
+                    this.props.history.push('/childrens');
                 }
             });
 
@@ -191,6 +192,7 @@ export class ChildrensManage extends React.Component {
                                 <TableCell>Spouse/Partner</TableCell>
                                 <TableCell>Dietary Restrictions</TableCell>
                                 <TableCell>Children</TableCell>
+                                <TableCell>Santa Photo</TableCell>
                                 <TableCell>RSVP Status</TableCell>
                             </TableRow>
                         </TableHead>
@@ -223,24 +225,27 @@ export class ChildrensManage extends React.Component {
                                                             })
                                                         }
                                                         </TableCell>
+                                                        <TableCell>{attending.photoWithSanta ? 'Yes' : 'No'}</TableCell>
                                                         <TableCell>{status}</TableCell>
                                                     </TableRow>
                                                 )
                                             })
                                     ) : (
                                         <TableRow>
-                                            <TableCell colSpan={6}>
+                                            <TableCell colSpan={7}>
                                                 <Typography variant="title">No RSVPs</Typography>
                                             </TableCell>
                                         </TableRow>
                                     )   
                             }
-            {/*<EditEmployeeDialog
-                                open={this.state.openEditDialog}
-                                onClose={this.handleCloseEditDialog}
-                                onSubmit={this.handleEditSubmit}
-                                employee={this.state.targetEmployee}
-                            />*/}
+                            {
+                                <EditChildrensEmployeeDialog
+                                    open={this.state.openEditDialog}
+                                    onClose={this.handleCloseEditDialog}
+                                    onSubmit={this.handleEditSubmit}
+                                    employee={this.state.targetEmployee}
+                                />
+                            }
                         </TableBody>
                     </Table>
                 </div>
