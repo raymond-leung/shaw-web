@@ -25,7 +25,8 @@ export function childrensLogin(employeeId, employeeLastName) {
 
 export function childrensLogout() {
     return (dispatch) => {
-        localStorage.removeItem('childrens-auth-token');
+        //localStorage.removeItem('childrens-auth-token');
+        localStorage.clear();
         dispatch({ type: 'CHILDRENS_UNAUTHENTICATE', payload: {} });
         
         return Promise.resolve();

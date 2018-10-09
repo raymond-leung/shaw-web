@@ -25,7 +25,8 @@ export function login(employeeId, employeeLastName) {
 
 export function logout() {
     return (dispatch) => {
-        localStorage.removeItem('auth-token');
+        //localStorage.removeItem('auth-token');
+        localStorage.clear();
         dispatch({ type: 'UNAUTHENTICATE', payload: {} });
         
         return Promise.resolve();
