@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { CSVDownload } from 'react-csv';
 
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -59,7 +60,8 @@ export class ChildrensManage extends React.Component {
 
         this.state = {
             openEditDialog: false,
-            targetStatus: 1
+            targetStatus: 1,
+            csvData: []
         };
 
         this.handleSearchChange = this.handleSearchChange.bind(this);
@@ -68,6 +70,7 @@ export class ChildrensManage extends React.Component {
         this.editEmployee = this.editEmployee.bind(this);
         this.handleEditSubmit = this.handleEditSubmit.bind(this);
         this.addComplete = this.addComplete.bind(this);
+        this.generateCSV = this.generateCSV.bind(this);
     }
 
     addComplete() {
@@ -109,6 +112,55 @@ export class ChildrensManage extends React.Component {
             })
             .catch((err) => {
                 console.log('update error: ', err);
+            })
+    }
+
+    generateCSV(done) {
+        const promiseArray = [
+            this.props.getList(1),
+            this.props.getCounts()
+        ];
+
+        return Promise.all(promiseArray)
+            .then((results) => {
+                let csvData = [ ["Employee ID", "Name", "Spouse", "Dietary", "Photo", "Child Name", "Child Age", "Child Gender", "Relationship"] ];
+
+                results[0].forEach((attending) => {
+                    csvData.push([
+                        attending.employeeId,
+                        `${attending.firstName} ${attending.lastName}`,
+                        attending.spouseName,
+                        attending.dietary,
+                        attending.photo ? "Yes" : "No",
+                        attending.children[0].name,
+                        attending.children[0].age,
+                        attending.children[0].gender,
+                        attending.children[0].relationship
+                    ]);
+
+                    if(attending.children.length > 1) {
+                        for(let ii=1; ii< attending.children.length; ii++) {
+                            csvData.push([
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                attending.children[ii].name,
+                                attending.children[ii].age,
+                                attending.children[ii].gender,
+                                attending.children[ii].relationship
+                            ])
+                        }
+                    }
+                });
+
+                csvData.push([`There are ${results[1].attending} total attendees -  ${results[1].adults} adults and ${parseInt(results[1].boys) + parseInt(results[1].girls)} total children attending (${results[1].boys} boys & ${results[1].girls} girls)`]);
+
+                this.setState({ csvData: csvData });
+            })
+            .catch((err) => {
+                console.log('results error: ', err);
             })
     }
 
@@ -178,6 +230,15 @@ export class ChildrensManage extends React.Component {
                     <AddChildrensEmployeeDialog 
                         onAddComplete={this.addComplete}
                     />
+                    
+                    <Button
+                        onClick={() => { this.generateCSV() }}
+                    >Export</Button>
+                    { this.state.csvData && this.state.csvData.length ? (
+                        <CSVDownload
+                            data={this.state.csvData}
+                            target="_blank"
+                        />) : null }
                 </Toolbar>
             </AppBar>
 
@@ -266,7 +327,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getList: (status) => { return dispatch(getList(status)) },
-        getCounts: () => { dispatch(getCounts()) },
+        getCounts: () => { return dispatch(getCounts()) },
         lookupEmployee: (employeeId) => { return dispatch(getEmployee(employeeId)) },
         updateEmployee: (rsvpObj) => { return dispatch(updateEmployee(rsvpObj)) },
         doSearch: (searchTerm) => { dispatch(searchEmployee(searchTerm)) },

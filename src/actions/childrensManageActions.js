@@ -54,6 +54,7 @@ export function getCounts() {
         return axiosWrapper.get(`${process.env.CHILDRENS_API_URL}/api/v1/childrens/manage/counts`)
             .then((response) => {
                 dispatch({ type: 'GET_CHILDRENS_RSVP_COUNTS_COMPLETE', payload: response.data });
+                return Promise.resolve(response.data);
             })
             .catch((err) => {
                 dispatch({ type: 'GET_CHILDRENS_RSVP_COUNTS_ERROR', payload: { err } });

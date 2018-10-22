@@ -52,7 +52,7 @@ export class EditChildrensEmployeeDialog extends React.Component {
 
     render() {
         const { classes } = this.props;
-console.log('edit: ', this.props.rsvp);        
+
         return (
             <Dialog
                 open={this.props.open}
