@@ -123,12 +123,13 @@ export class ChildrensManage extends React.Component {
 
         return Promise.all(promiseArray)
             .then((results) => {
-                let csvData = [ ["Employee ID", "Name", "Spouse", "Dietary", "Photo", "Child Name", "Child Age", "Child Gender", "Relationship"] ];
+                let csvData = [ ["Employee ID", "First Name", "Last Name", "Spouse", "Dietary", "Photo", "Child Name", "Child Age", "Child Gender", "Relationship"] ];
 
                 results[0].forEach((attending) => {
                     csvData.push([
                         attending.employeeId,
-                        `${attending.firstName} ${attending.lastName}`,
+                        attending.firstName,
+                        attending.lastName,
                         attending.spouseName,
                         attending.dietary,
                         attending.photo ? "Yes" : "No",
