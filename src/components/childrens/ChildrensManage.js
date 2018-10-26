@@ -147,6 +147,7 @@ export class ChildrensManage extends React.Component {
                                 "",
                                 "",
                                 "",
+                                "",
                                 attending.children[ii].name,
                                 attending.children[ii].age,
                                 attending.children[ii].gender,
