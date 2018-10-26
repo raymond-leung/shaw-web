@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { CSVDownload } from 'react-csv';
 
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -62,7 +63,8 @@ export class Manage extends React.Component {
             page: 0,
             rowsPerPage: 10,
             openEditDialog: false,
-            targetStatus: 1
+            targetStatus: 1,
+            csvData: []
         };
 
         this.handleChangePage = this.handleChangePage.bind(this);
@@ -73,6 +75,7 @@ export class Manage extends React.Component {
         this.editEmployee = this.editEmployee.bind(this);
         this.handleEditSubmit = this.handleEditSubmit.bind(this);
         this.addComplete = this.addComplete.bind(this);
+        this.generateCSV = this.generateCSV.bind(this);
     }
 
     addComplete() {
@@ -125,12 +128,33 @@ export class Manage extends React.Component {
             })
     }
 
+    generateCSV() {
+        this.props.getList(1)
+            .then((results) => {
+                let csvData = [ ["Employee ID", "First Name", "Last Name", "Guest", "Email", "Dietary", "Assistance"] ];
+                results.forEach((attending) => {
+                    csvData.push([
+                        attending.empmloyeeId,
+                        attending.firstName,
+                        attending.lastName,
+                        attending.guestName,
+                        attending.email,
+                        attending.dietary,
+                        attending.assistance
+                    ]);
+                });
+
+                this.setState({ csvData: csvData });
+            })
+            .catch((err) => {
+                console.log('Error fetching data for CSV export: ', err);
+            })
+    }
+
     componentDidMount() {
         this.props.getList(1)
             .catch((err) => {
-                console.log("here: ", err.response);
                 if(err.response.status === 403) {
-                    console.log('forwarding');
                     this.props.history.push('/');
                 }
             });
@@ -199,6 +223,18 @@ export class Manage extends React.Component {
                     <AddEmployeeDialog 
                         onAddComplete={this.addComplete}
                     />
+
+                    <Button
+                        onClick={() => { this.generateCSV() }}
+                    >Export</Button>
+                    {
+                        this.state.csvData && this.state.csvData.length ? (
+                            <CSVDownload
+                                data={this.state.csvData}
+                                target='_blank'
+                            />
+                        ): null
+                    }
                 </Toolbar>
             </AppBar>
 
@@ -221,7 +257,6 @@ export class Manage extends React.Component {
                                 displayContent.length ?
                                     (
                                         displayContent
-                                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                             .map((attending) => {
                                                 let status = 'No Response';
                                                 if(attending.status === 0) {
@@ -261,14 +296,6 @@ export class Manage extends React.Component {
                         </TableBody>
                     </Table>
                 </div>
-                <TablePagination
-                    component="div"
-                    count={displayContent.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onChangePage={this.handleChangePage}
-                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                />
             </Paper>
             </React.Fragment>
         );

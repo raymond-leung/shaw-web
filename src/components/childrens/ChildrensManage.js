@@ -115,7 +115,7 @@ export class ChildrensManage extends React.Component {
             })
     }
 
-    generateCSV(done) {
+    generateCSV() {
         const promiseArray = [
             this.props.getList(1),
             this.props.getCounts()
