@@ -17,17 +17,12 @@ export function getRsvp() {
 
 export function rsvp(rsvpObj) {
     return (dispatch) => {
+
         dispatch({ type: 'SUBMIT_RSVP_START', payload: {} });
         return axiosWrapper.put(`${process.env.API_URL}/api/v1/rsvp`, {
             data: {
                 status: rsvpObj.status,
-                guestName: rsvpObj.guestName,
-                guestEmployeeId: rsvpObj.guestEmployeeId,
-                firstName: rsvpObj.firstName,
-                lastName: rsvpObj.lastName,
-                dietary: rsvpObj.dietary,
-                assistance: rsvpObj.assistance,
-                email: rsvpObj.email
+                alergies: rsvpObj.alergies
             }
         }).then((response) => {
             dispatch({ type: 'SUBMIT_RSVP_COMPLETE', payload: response.data });

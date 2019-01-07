@@ -64,8 +64,6 @@ export class Rsvp extends React.Component {
         this.closeError = this.closeError.bind(this);
 
         this.state = {
-            attendingAsGuest: null,
-            guestError: null,
             showError: false
         }
     }
@@ -93,25 +91,21 @@ export class Rsvp extends React.Component {
     }
 
     rsvpClickHandler() {
-        if(this.props.rsvp.status && this.props.rsvp.firstName.length > 0 && this.props.rsvp.lastName.length > 0 && this.props.rsvp.email.length > 0) {
-            this.props.submit(this.props.rsvp)
-                .then((response) => {
-                    this.setState({ guestError: null, showError: false });
-                    this.props.history.push('/confirmed')
-                })
-                .catch((err) => {
-                    if(err.response.status === 401) {
-                        this.logoutClickHandler();
-                    } else if(err.response.status === 409) {
-                        this.setState({ 
-                            guestError: err.response.data.err.message,
-                            showError: true
-                        });
-                    }
-                })
-        } else {
-            this.setState({ showError: true });
-        }
+        this.props.submit(this.props.rsvp)
+            .then((response) => {
+                this.setState({ guestError: null, showError: false });
+                this.props.history.push('/confirmed')
+            })
+            .catch((err) => {
+                if(err.response.status === 401) {
+                    this.logoutClickHandler();
+                } else if(err.response.status === 409) {
+                    this.setState({ 
+                        guestError: err.response.data.err.message,
+                        showError: true
+                    });
+                }
+            })
     }
 
     closeError() {
@@ -140,89 +134,85 @@ export class Rsvp extends React.Component {
             <div id='rsvp'>
                 <img src='./img/1920x300.jpg' className={classes.banner} />
             {
-                this.state.attendingAsGuest !== null ?
-                    (
-                        <div className={classes.attendingAsGuest}>
-                            <Typography variant="title">{this.state.attendingAsGuest}</Typography>
-                            <Typography variant="title">If this is incorrect or you wish to make any changes, please contact <a href="mailto:jenny.wong@sjrb.ca">Jenny Wong</a></Typography>
-                            <br />
-                            <Button onClick={this.logoutClickHandler} variant="outlined" color="default">Logout</Button>
-                        </div>
-                    ) : (
-                        <React.Fragment>
-                            <Snackbar
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'center',
-                                }}
-                                open={this.state.showError}
-                                onClose={this.closeError}
-                            >
-                                <SnackbarContent
-                                    className={classes.error}
-                                    message = { this.state.guestError ? this.state.guestError : (
-                                        <span className={classes.errorMessage}>
-                                            <p>There was an error submitting your RSVP</p>
-                                            <p>Please make sure all required fields have been filled including Response</p>
-                                        </span>)
-                                    }
-                                    action={[
-                                        <IconButton
-                                            key="close"
-                                            color="inherit"
-                                            onClick={this.closeError}
-                                            className={classes.close}
-                                        >
-                                            <CloseIcon />
-                                        </IconButton>
-                                    ]}
-                                />
-                            </Snackbar>
-
-                            <div className={classes.details}>
-                                <Typography variant="headline" style={{ fontWeight: '700' }}>2018 End of Year Celebration</Typography>
-                                <br />
-                                <Typography variant="title">Vancouver Convention Center</Typography>
-                                <Typography variant="title">Saturday December 8th, 2018</Typography>
-                                <Typography variant="title">7:45PM - 1:00AM</Typography>
-                                <Typography variant="title"><a href="./img/faq.pdf" target="_blank">FAQ</a></Typography>
-                            </div>
-
-                            <RsvpForm 
-                                model="forms.rsvp"
-                                rsvp={this.props.rsvp}
+                (
+                    <React.Fragment>
+                        <Snackbar
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'center',
+                            }}
+                            open={this.state.showError}
+                            onClose={this.closeError}
+                        >
+                            <SnackbarContent
+                                className={classes.error}
+                                message = { this.state.guestError ? this.state.guestError : (
+                                    <span className={classes.errorMessage}>
+                                        <p>There was an error submitting your RSVP</p>
+                                        <p>Please make sure all required fields have been filled including Response</p>
+                                    </span>)
+                                }
+                                action={[
+                                    <IconButton
+                                        key="close"
+                                        color="inherit"
+                                        onClick={this.closeError}
+                                        className={classes.close}
+                                    >
+                                        <CloseIcon />
+                                    </IconButton>
+                                ]}
                             />
-                            <div className={classes.buttonGroup}>
-                                <Button 
-                                    variant="contained" 
-                                    component="span" 
-                                    className={classes.button}
-                                    color="primary"
-                                    onClick={this.rsvpClickHandler}
-                                >
-                                    RSVP
-                                </Button>
-                                <Button 
-                                    variant="outlined" 
-                                    component="span" 
-                                    className={classes.button}
-                                    color="primary"
-                                    onClick={this.cancelRsvpClickHandler}
-                                >
-                                    Cancel RSVP
-                                </Button>
-                                <Button 
-                                    variant="contained" 
-                                    component="span" 
-                                    className={classes.button}
-                                    color="default"
-                                    onClick={this.logoutClickHandler}
-                                >
-                                    Logout
-                                </Button>
-                            </div>
-                        </React.Fragment>
-                    )
+                        </Snackbar>
+
+                        <div className={classes.details}>
+                            <Typography variant="headline" style={{ fontWeight: '700' }}>Happy Holidays from the Shaw Family and Jay</Typography>
+                            <br />
+                            <Typography variant="title">Thursday February 7th, 2019</Typography>
+                            <Typography variant="title">The Commodore Ballroom</Typography>
+                            <Typography variant="title">868 Granville St, Vancouver</Typography>
+                            <Typography variant="title">Doors open at 6:30pm</Typography>
+                        </div>
+
+                        <Typography style={{ textAlign: 'center', marginTop: '50px', fontSize: '1.5rem' }}>
+                            Welcome { this.props.rsvp.preferredName} { this.props.rsvp.lastName } ({ this.props.rsvp.employeeId })
+                        </Typography>
+
+                        <RsvpForm 
+                            model="forms.rsvp"
+                            rsvp={this.props.rsvp}
+                        />
+                        <div className={classes.buttonGroup}>
+                            <Button 
+                                variant="contained" 
+                                component="span" 
+                                className={classes.button}
+                                color="primary"
+                                onClick={this.rsvpClickHandler}
+                            >
+                                RSVP
+                            </Button>
+                            <Button 
+                                variant="outlined" 
+                                component="span" 
+                                className={classes.button}
+                                color="primary"
+                                onClick={this.cancelRsvpClickHandler}
+                            >
+                                Cancel RSVP
+                            </Button>
+                            <Button 
+                                variant="contained" 
+                                component="span" 
+                                className={classes.button}
+                                color="default"
+                                onClick={this.logoutClickHandler}
+                            >
+                                Logout
+                            </Button>
+                        </div>
+                    </React.Fragment>
+                )
             }
             </div>
         );

@@ -23,6 +23,10 @@ const styles = theme => ({
     logoutButton: {
         textAlign: 'center',
         marginTop: '35px'
+    },
+    maxAttending: {
+        marginTop: '30px',
+        color: 'red'
     }
 });
 
@@ -54,7 +58,6 @@ export class Confirmed extends React.Component {
 
     render() {
         const { classes } = this.props;
-        
         const status = this.props.rsvp.status;
         let response = null;
 
@@ -66,28 +69,27 @@ export class Confirmed extends React.Component {
                         <br />
                         <Typography variant="title">
                             Attending
-                            { 
-                                this.props.rsvp.guestName ? 
-                                    (
-                                        ` with ${this.props.rsvp.guestName}`
-                                    ) : null
-                            }
                         </Typography>
                         <Typography variant="title">
                             { 
-                                this.props.rsvp.dietary ?
+                                this.props.rsvp.alergies ?
                                 (
-                                    `Dietary Restrictions: ${this.props.rsvp.dietary}`
+                                    `Alergies: ${this.props.rsvp.alergies}`
                                 ) : null
                             }
                         </Typography>
+                        {
+                            this.props.rsvp.isWaitingList ?
+                            (
+                                <Typography variant="title" className={classes.maxAttending}>
+                                    You have been placed on the waiting list because we are at capacity for this event.
+                                </Typography>
+                            ) : null
+                        }
+
+                        <br />
                         <Typography variant="title">
-                            {
-                                this.props.rsvp.assistance ?
-                                (
-                                    `Special Assistance: ${this.props.rsvp.assistance}`
-                                ) : null
-                            }
+                            Please contact <a href="mailto:jenny.wong@sjrb.ca?subject=Vancouver Employee Appreciation Event Question">Jenny Wong</a> if you have any questions.
                         </Typography>
                     </div>
                 </React.Fragment>
