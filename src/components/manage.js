@@ -246,9 +246,7 @@ export class Manage extends React.Component {
                                 <TableCell>Employee ID</TableCell>
                                 <TableCell>Employee Name</TableCell>
                                 <TableCell>Email</TableCell>
-                                <TableCell>Guest Name</TableCell>
-                                <TableCell>Dietary Restrictions</TableCell>
-                                <TableCell>Special Assistance</TableCell>
+                                <TableCell>Alergies</TableCell>
                                 <TableCell>RSVP Status</TableCell>
                             </TableRow>
                         </TableHead>
@@ -272,9 +270,7 @@ export class Manage extends React.Component {
                                                         <TableCell onClick={this.editEmployee}><a href="javascript:void(0)">{attending.employeeId}</a></TableCell>
                                                         <TableCell>{attending.firstName} {attending.lastName}</TableCell>
                                                         <TableCell>{attending.email}</TableCell>
-                                                        <TableCell>{attending.guestName}</TableCell>
-                                                        <TableCell>{attending.dietary}</TableCell>
-                                                        <TableCell>{attending.assistance}</TableCell>
+                                                        <TableCell>{attending.alergies}</TableCell>
                                                         <TableCell>{status}</TableCell>
                                                     </TableRow>
                                                 )
