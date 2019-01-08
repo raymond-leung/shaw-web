@@ -78,7 +78,7 @@ export class Confirmed extends React.Component {
                             { 
                                 this.props.rsvp.alergies ?
                                 (
-                                    `Alergies: ${this.props.rsvp.alergies}`
+                                    `Allergies: ${this.props.rsvp.alergies}`
                                 ) : null
                             }
                         </Typography>

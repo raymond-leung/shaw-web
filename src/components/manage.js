@@ -246,7 +246,7 @@ export class Manage extends React.Component {
                                 <TableCell>Employee ID</TableCell>
                                 <TableCell>Employee Name</TableCell>
                                 <TableCell>Email</TableCell>
-                                <TableCell>Alergies</TableCell>
+                                <TableCell>Allergies</TableCell>
                                 <TableCell>RSVP Status</TableCell>
                             </TableRow>
                         </TableHead>

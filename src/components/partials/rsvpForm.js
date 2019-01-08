@@ -51,7 +51,7 @@ export class RsvpForm extends React.Component {
                         />
                     </Grid>
                     <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
-                        <InputLabel htmlFor="alergies">Alergies</InputLabel>
+                        <InputLabel htmlFor="alergies">Allergies</InputLabel>
                     </Grid>
                     <Grid item lg={6} md={6} sm={12} xs={12} className={classes.inputLabel}>
                         <Control.text

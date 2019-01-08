@@ -172,8 +172,6 @@ export class Rsvp extends React.Component {
                         </Snackbar>
 
                         <div className={classes.details}>
-                            <Typography variant="headline" style={{ fontWeight: '700' }}>Happy Holidays from the Shaw Family and Jay</Typography>
-                            <br />
                             <Typography variant="title">Thursday February 7th, 2019</Typography>
                             <Typography variant="title">The Commodore Ballroom</Typography>
                             <Typography variant="title">868 Granville St, Vancouver</Typography>
