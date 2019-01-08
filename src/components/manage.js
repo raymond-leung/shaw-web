@@ -131,7 +131,7 @@ export class Manage extends React.Component {
     generateCSV() {
         this.props.getList(1)
             .then((results) => {
-                let csvData = [ ["Employee ID", "First Name", "Last Name", "Guest", "Email", "Dietary", "Assistance"] ];
+                let csvData = [ ["Employee ID", "First Name", "Last Name", "Guest", "Email", "Dietary", "Assistance", "Title", "Department"] ];
                 results.forEach((attending) => {
                     csvData.push([
                         attending.empmloyeeId,
@@ -140,7 +140,9 @@ export class Manage extends React.Component {
                         attending.guestName,
                         attending.email,
                         attending.dietary,
-                        attending.assistance
+                        attending.assistance,
+                        attending.title,
+                        attending.department
                     ]);
                 });
 
