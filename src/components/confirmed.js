@@ -11,8 +11,12 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
+    center: {
+        textAlign: 'center',
+    },
     banner: {
-        width: '100%',
+        //width: '100%',
+        width: '500px',
         margin: '0 auto',
     },
     response: {
@@ -108,7 +112,9 @@ export class Confirmed extends React.Component {
 
         return (
             <div id='confirmed'>
-                <img src='./img/1920x300.jpg' className={classes.banner} />
+                <div className={classes.center}>
+                    <img src='./img/customer_appreciation.jpg' className={classes.banner} />
+                </div>
                 { response }
                 <div className={classes.logoutButton}>
                     <Button variant="contained" color="primary" onClick={this.logoutClickHandler}>Logout</Button>

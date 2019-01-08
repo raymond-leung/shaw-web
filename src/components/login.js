@@ -18,8 +18,12 @@ import CloseIcon from '@material-ui/icons/Close';
 import { login } from './../actions/authActions';
 
 const styles = theme => ({
+    center: {
+        textAlign: 'center',
+    },
     banner: {
-        width: '100%',
+        //width: '100%',
+        width: '500px',
         marginBottom: '50px'
     },
     inputLabel: {
@@ -129,8 +133,8 @@ export class Login extends React.Component {
                     model="forms.auth"
                 >
                     <Grid container spacing={24}>
-                        <Grid item lg={12} md={12} sm={12} xs={12}>
-                            <img className={classes.banner} src='./img/1920x300.jpg' />
+                        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.center}>
+                            <img className={classes.banner} src='./img/customer_appreciation.jpg' />
                         </Grid>
                         <Grid item lg={12} md={12} sm={12} xs={12} className={classes.inputLabel}>
                             <InputLabel htmlFor="employee-last-name">Employee Last Name</InputLabel>

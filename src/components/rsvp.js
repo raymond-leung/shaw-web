@@ -18,8 +18,12 @@ import { getRsvp, rsvp, cancelRsvp } from './../actions/rsvpActions';
 import { logout } from './../actions/authActions';
 
 const styles = theme => ({
+    center: {
+        textAlign: 'center',
+    },
     banner: {
-        width: '100%'
+        //width: '100%'
+        width: '500px'
     },
     button: {
         margin: theme.spacing.unit,
@@ -132,7 +136,9 @@ export class Rsvp extends React.Component {
 
         return (
             <div id='rsvp'>
-                <img src='./img/1920x300.jpg' className={classes.banner} />
+                <div className={classes.center}>
+                    <img src='./img/customer_appreciation.jpg' className={classes.banner} />
+                </div>
             {
                 (
                     <React.Fragment>
