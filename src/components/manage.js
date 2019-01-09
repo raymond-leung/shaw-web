@@ -172,7 +172,13 @@ export class Manage extends React.Component {
         if(this.props.manage.searchTerm.length > 0) {
             displayContent = this.props.manage.searchResults;
         } else {
-            displayContent = this.props.manage.list;
+            if(this.state.targetStatus === 1) {
+                displayContent = this.props.manage.list.filter(content => content.status === 1 && content.isWaitingList === 0);
+            } else if(this.state.targetStatus === 11) {
+                displayContent = this.props.manage.list.filter(content => content.status === 1 && content.isWaitingList === 1);
+            } else {
+                displayContent = this.props.manage.list;
+            }
         }
 
         return (
@@ -201,6 +207,12 @@ export class Manage extends React.Component {
                         this.setState({ searchTerm: "" });
                         this.props.getList(1) } 
                     }>Attending ({ counts.attending || 0 })</Button>
+                    <Button onClick={ () => { 
+                        this.setState({ targetStatus: 11 });
+                        this.props.searchTermChange("");
+                        this.setState({ searchTerm: "" });
+                        this.props.getList(1) } 
+                    }>Waiting List ({ counts.waitingList || 0 })</Button>
                     <Button onClick={ () => { 
                         this.setState({ targetStatus: 2 }); 
                         this.props.searchTermChange("");
@@ -248,6 +260,8 @@ export class Manage extends React.Component {
                                 <TableCell>Email</TableCell>
                                 <TableCell>Allergies</TableCell>
                                 <TableCell>RSVP Status</TableCell>
+                                <TableCell>Waiting List</TableCell>
+                                <TableCell>RSVP Date</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -272,6 +286,12 @@ export class Manage extends React.Component {
                                                         <TableCell>{attending.email}</TableCell>
                                                         <TableCell>{attending.alergies}</TableCell>
                                                         <TableCell>{status}</TableCell>
+                                                        <TableCell>{attending.isWaitingList ? 'Yes' : 'No'}</TableCell>
+                                                        <TableCell>
+                                                        {
+                                                            attending.rsvpDateTime ? `${(new Date(attending.rsvpDateTime)).toDateString()} ${(new Date(attending.rsvpDateTime)).toTimeString()}` : 'No Date Time'
+                                                        }
+                                                        </TableCell>
                                                     </TableRow>
                                                 )
                                             })
