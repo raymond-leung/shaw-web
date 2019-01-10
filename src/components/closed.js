@@ -44,14 +44,14 @@ export class Closed extends React.Component {
                 <img src='./img/1920x800.jpg' className={classes.banner} />
                 <div className={classes.content}>
                     <Typography variant="title">
-                        The 2018 End of Year Celebration RSVP is available between <br /><br />
+                        The 2019 Employee Appreciation Event RSVP is available between <br /><br />
                         {months[startDate.getMonth()]} {startDate.getDate()}, {startDate.getFullYear()} <br /><br />till<br /><br />
                         {months[endDate.getMonth()]} {endDate.getDate()}, {endDate.getFullYear()}.
                     </Typography>
 
                     <br /><br /><br />
                     <Typography variant="title">
-                        Please contact the <a href="mailto:YearEndCelebration-Vancouver@sjrb.ca">Year End Celebration Committee</a> for any inquirires
+                        Please contact the <a href="mailto:jenny.wong@sjrb.ca">Jenny Wong</a> for any inquirires
                     </Typography>
                 </div>
             </div>
