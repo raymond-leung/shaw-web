@@ -131,16 +131,19 @@ export class Manage extends React.Component {
     generateCSV() {
         this.props.getList(1)
             .then((results) => {
-                let csvData = [ ["Employee ID", "First Name", "Last Name", "Guest", "Email", "Dietary", "Assistance"] ];
+                let csvData = [ ["Employee ID", "First Name", "Last Name", "Email", "Allergies", "Title", "Location", "Department", "isWaitingList", "RSVP Date Time"] ];
                 results.forEach((attending) => {
                     csvData.push([
                         attending.empmloyeeId,
                         attending.firstName,
                         attending.lastName,
-                        attending.guestName,
                         attending.email,
-                        attending.dietary,
-                        attending.assistance
+                        attending.alergies,
+                        attending.title,
+                        attending.location,
+                        attending.department,
+                        attending.isWaitingList ? 'Yes' : 'No',
+                        attending.rsvpDateTime ? `${(new Date(attending.rsvpDateTime)).toDateString()} ${(new Date(attending.rsvpDateTime)).toTimeString()}` : 'No Date Time'
                     ]);
                 });
 
@@ -175,7 +178,21 @@ export class Manage extends React.Component {
             if(this.state.targetStatus === 1) {
                 displayContent = this.props.manage.list.filter(content => content.status === 1 && content.isWaitingList === 0);
             } else if(this.state.targetStatus === 11) {
-                displayContent = this.props.manage.list.filter(content => content.status === 1 && content.isWaitingList === 1);
+                console.log('here: ', this.props.manage.list);
+                const copy = [...this.props.manage.list];
+                copy.sort((aa, bb) => {
+                    if(new Date(aa.rsvpDateTime) === new Date(bb.rsvpDateTime)) {
+                        return 0;
+                    }
+                    if(new Date(aa.rsvpDateTime) > new Date(bb.rsvpDateTime)) {
+                        return 1;
+                    }
+                    if(new Date(aa.rsvpDateTime) < new Date(bb.rsvpDateTime)) {
+                        return -1;
+                    }
+                });
+
+                displayContent = copy.filter(content => content.status === 1 && content.isWaitingList === 1);
             } else {
                 displayContent = this.props.manage.list;
             }
@@ -260,6 +277,9 @@ export class Manage extends React.Component {
                                 <TableCell>Email</TableCell>
                                 <TableCell>Allergies</TableCell>
                                 <TableCell>RSVP Status</TableCell>
+                                <TableCell>Role</TableCell>
+                                <TableCell>Location</TableCell>
+                                <TableCell>Department</TableCell>
                                 <TableCell>Waiting List</TableCell>
                                 <TableCell>RSVP Date</TableCell>
                             </TableRow>
@@ -286,6 +306,9 @@ export class Manage extends React.Component {
                                                         <TableCell>{attending.email}</TableCell>
                                                         <TableCell>{attending.alergies}</TableCell>
                                                         <TableCell>{status}</TableCell>
+                                                        <TableCell>{attending.title}</TableCell>
+                                                        <TableCell>{attending.location}</TableCell>
+                                                        <TableCell>{attending.department}</TableCell>
                                                         <TableCell>{attending.isWaitingList ? 'Yes' : 'No'}</TableCell>
                                                         <TableCell>
                                                         {

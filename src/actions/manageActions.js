@@ -81,13 +81,10 @@ export function updateEmployee(rsvpObj) {
             data: {
                 employeeId: rsvpObj.employeeId,
                 status: rsvpObj.status,
-                guestName: rsvpObj.guestName,
-                guestEmployeeId: rsvpObj.guestEmployeeId,
                 firstName: rsvpObj.firstName,
                 lastName: rsvpObj.lastName,
-                dietary: rsvpObj.dietary,
-                assistance: rsvpObj.assistance,
-                email: rsvpObj.email
+                email: rsvpObj.email,
+                alergies: rsvpObj.alergies
             }
         }).then((response) => {
             dispatch({ type: 'SUBMIT_RSVP_COMPLETE', payload: {} })
