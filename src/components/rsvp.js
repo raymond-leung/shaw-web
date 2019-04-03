@@ -172,9 +172,9 @@ export class Rsvp extends React.Component {
                         </Snackbar>
 
                         <div className={classes.details}>
-                            <Typography variant="title">Thursday February 7th, 2019</Typography>
-                            <Typography variant="title">The Commodore Ballroom</Typography>
-                            <Typography variant="title">868 Granville St, Vancouver</Typography>
+                            <Typography variant="title">Thursday April 25th, 2019</Typography>
+                            <Typography variant="title">The Garrick</Typography>
+                            <Typography variant="title">330 Garry Street, Winnipeg MB</Typography>
                             <Typography variant="title">Doors open at 6:30pm</Typography>
                         </div>
 

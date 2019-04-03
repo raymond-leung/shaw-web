@@ -38,7 +38,12 @@ export function addEmployee(employeeObj) {
                 employeeId: employeeObj.employeeId,
                 firstName: employeeObj.firstName,
                 lastName: employeeObj.lastName,
-                email: employeeObj.email
+                email: employeeObj.email,
+                title: employeeObj.title,
+                department: employeeObj.department,
+                location: employeeObj.location,
+                manager: employeeObj.manager,
+                vp: employeeObj.vp
             }
         }).then((response) => {
             return dispatch({ type: 'ADD_EMPLOYEE_COMPLETE', payload: {} });
@@ -102,3 +107,29 @@ export function cancelRsvp() {
         return Promise.resolve();
     }
 };
+
+export function getAddEmployeeLists() {
+    return (dispatch) => {
+        const promiseArray = [];
+
+        promiseArray.push(axiosWrapper.get(`${process.env.API_URL}/api/v1/manage/departments`));
+        promiseArray.push(axiosWrapper.get(`${process.env.API_URL}/api/v1/manage/locations`));
+        promiseArray.push(axiosWrapper.get(`${process.env.API_URL}/api/v1/manage/managers`));
+        promiseArray.push(axiosWrapper.get(`${process.env.API_URL}/api/v1/manage/vps`));
+        promiseArray.push(axiosWrapper.get(`${process.env.API_URL}/api/v1/manage/titles`));
+
+        return Promise.all(promiseArray)
+                .then((results) => {
+                    return {
+                        departments: results[0].data,
+                        locations: results[1].data,
+                        managers: results[2].data,
+                        vps: results[3].data,
+                        titles: results[4].data
+                    };
+                })
+                .catch(err => {
+                    console.log('err: ', err);
+                })
+    }
+}

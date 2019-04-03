@@ -2,7 +2,17 @@ const defaultState = {
     employeeId: "",
     firstName: "",
     lastName: "",
+    preferredName: "",
+    title: "",
+    department: "",
+    location: "",
     email: "",
+    manager: "",
+    vp: "",
+    alergies: "",
+    status: "",
+    isWaitingList: false,
+    rsvpDateTime: "",
     isLoading: false,
     error: {},
     isError: false
@@ -19,7 +29,17 @@ const addEmployeeFormReducer = (state=defaultState, action) => {
                 employeeId: "",
                 firstName: "",
                 lastName: "",
-                email: ""
+                preferredName: "",
+                title: "",
+                department: "",
+                location: "",
+                email: "",
+                manager: "",
+                vp: "",
+                alergies: "",
+                status: "",
+                isWaitingList: false,
+                rsvpDateTime: ""
             }
         case 'ADD_EMPLOYEE_START':
             return {

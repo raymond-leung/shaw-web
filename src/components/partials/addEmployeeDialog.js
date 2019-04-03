@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'; 
 import { Control, Form, actions } from 'react-redux-form';
 
-import { addEmployee } from './../../actions/manageActions';
+import { addEmployee, getAddEmployeeLists } from './../../actions/manageActions';
 
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -14,6 +14,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import CloseIcon from '@material-ui/icons/Close';
@@ -47,11 +48,26 @@ export class AddEmployeeDialog extends React.Component {
     
         this.state = {
             open: false,
+            departments: [],
+            locations: [],
+            managers: [],
+            vps: [],
+            titles: []
         };
 
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleCreateEmployee = this.handleCreateEmployee.bind(this);
+
+        this.props.getAddEmployeeLists().then((results) => {
+            this.setState({
+                departments: results.departments,
+                locations: results.locations,
+                managers: results.managers,
+                vps: results.vps,
+                titles: results.titles
+            })
+        });
     };
     
     handleOpen() {
@@ -126,12 +142,102 @@ export class AddEmployeeDialog extends React.Component {
                                     />
                                 </Grid>
                                 <Grid item lg={4} md={4} sm={4} xs={12} className={classes.inputLabel}>
+                                    <InputLabel>Title</InputLabel>
+                                </Grid>
+                                <Grid item lg={8} md={8} sm={8} xs={12}>
+                                    <Control.select
+                                        model=".title"
+                                        id="add-employee-title"
+                                        component={Select}
+                                    >
+                                        {
+                                            this.state.titles.map((title) => {
+                                                return (<option key={title.title} value={title.title}>{title.title}</option>);
+                                            })
+                                        }
+                                    </Control.select>
+                                </Grid>
+                                <Grid item lg={4} md={4} sm={4} xs={12} className={classes.inputLabel}>
+                                    <InputLabel>Department</InputLabel>
+                                </Grid>
+                                <Grid item lg={8} md={8} sm={8} xs={12}>
+                                    <Control.select
+                                        model=".department"
+                                        id="add-employee-department"
+                                        component={Select}
+                                    >
+                                        { 
+                                            this.state.departments.map((department) => {
+                                                return (<option key={department.department} value={department.department}>{department.department}</option>)
+                                            })
+                                        }
+                                    </Control.select>
+                                </Grid>
+                                <Grid item lg={4} md={4} sm={4} xs={12} className={classes.inputLabel}>
+                                    <InputLabel>location</InputLabel>
+                                </Grid>
+                                <Grid item lg={8} md={8} sm={8} xs={12}>
+                                    <Control.select
+                                        model=".location"
+                                        id="add-employee-location"
+                                        component={Select}
+                                    >
+                                        {
+                                            this.state.locations.map((location) => {
+                                                return (<option key={location.location} value={location.location}>{location.location}</option>);
+                                            })
+                                        }
+                                    </Control.select>
+                                </Grid>
+                                <Grid item lg={4} md={4} sm={4} xs={12} className={classes.inputLabel}>
                                     <InputLabel>Email Address</InputLabel>
                                 </Grid>
                                 <Grid item lg={8} md={8} sm={8} xs={12}>
                                     <Control.text
                                         model=".email"
                                         id="add-employee-email"
+                                        component={TextField}
+                                    />
+                                </Grid>
+                                <Grid item lg={4} md={4} sm={4} xs={12} className={classes.inputLabel}>
+                                    <InputLabel>Manager</InputLabel>
+                                </Grid>
+                                <Grid item lg={8} md={8} sm={8} xs={12}>
+                                    <Control.select
+                                        model=".manager"
+                                        id="add-employee-manager"
+                                        component={Select}
+                                    >
+                                        {
+                                            this.state.managers.map((manager) => {
+                                                return (<option key={manager.manager} value={manager.manager}>{manager.manager}</option>);
+                                            })
+                                        }
+                                    </Control.select>
+                                </Grid>
+                                <Grid item lg={4} md={4} sm={4} xs={12} className={classes.inputLabel}>
+                                    <InputLabel>VP</InputLabel>
+                                </Grid>
+                                <Grid item lg={8} md={8} sm={8} xs={12}>
+                                    <Control.select
+                                        model=".vp"
+                                        id="add-employee-vp"
+                                        component={Select}
+                                    >
+                                        {
+                                            this.state.vps.map((vp) => {
+                                                return (<option key={vp.vp} value={vp.vp}>{vp.vp}</option>)
+                                            })
+                                        }
+                                    </Control.select>
+                                </Grid>
+                                <Grid item lg={4} md={4} sm={4} xs={12} className={classes.inputLabel}>
+                                    <InputLabel>Allergies</InputLabel>
+                                </Grid>
+                                <Grid item lg={8} md={8} sm={8} xs={12}>
+                                    <Control.text
+                                        model=".alergies"
+                                        id="add-employee-allergies"
                                         component={TextField}
                                     />
                                 </Grid>
@@ -157,7 +263,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         initAddEmployee: () => { dispatch({ type: 'ADD_EMPLOYEE_INIT', payload: {} }) },
-        doAddEmployee: (employeeObj) => { return dispatch(addEmployee(employeeObj)) }
+        doAddEmployee: (employeeObj) => { return dispatch(addEmployee(employeeObj)) },
+        getAddEmployeeLists: () => { return dispatch(getAddEmployeeLists()) }
     };          
 }           
         
